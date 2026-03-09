@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pytorch-master
+spec:
+  containers:
+    - name: master
+      image: aaadys/pytorch-distributed-demo:latest
+      env:
+        - name: MASTER_ADDR
+          value: "pytorch-master"  # the master pod hostname
+        - name: MASTER_PORT
+          value: "12355"
+        - name: WORLD_SIZE
+          value: "3"  # master + number of workers
+        - name: RANK
+          value: "0"  # master is rank 0

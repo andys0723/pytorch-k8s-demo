@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pytorch-worker-1
+spec:
+  containers:
+    - name: worker
+      image: aaadys/pytorch-distributed-demo:latest
+      env:
+        - name: MASTER_ADDR
+          value: "pytorch-master"
+        - name: MASTER_PORT
+          value: "12355"
+        - name: WORLD_SIZE
+          value: "3"
+        - name: RANK
+          value: "1"  # worker rank (increment for additional workers)

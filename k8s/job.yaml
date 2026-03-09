@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pytorch-job
+spec:
+  completions: 2
+  parallelism: 2
+  template:
+    spec:
+      containers:
+      - name: worker
+        image: pytorch-distributed-demo:latest
+        env:
+          - name: WORLD_SIZE
+            value: "2"
+          - name: MASTER_ADDR
+            value: "pytorch-master"
+          - name: MASTER_PORT
+            value: "12355"
+      restartPolicy: OnFailure
